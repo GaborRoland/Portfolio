@@ -70,6 +70,89 @@
       width: 100%;
       height: 1000px;
     }
+    .lang-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  margin-left: 6px;
+  padding: 0;
+}
+
+.lang-btn img {
+  width: 60px;
+  height: auto;
+  border-radius: 4px;
+  transition: transform 0.2s ease;
+}
+
+.lang-btn:hover img {
+  transform: scale(1.1);
+}
+
+/* Tooltip */
+.lang-btn::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: -32px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #333;
+  color: #fff;
+  padding: 4px 8px;
+  font-size: 12px;
+  border-radius: 4px;
+  opacity: 0;
+  pointer-events: none;
+  white-space: nowrap;
+  transition: opacity 0.2s ease;
+}
+
+.lang-btn:hover::after {
+  opacity: 1;
+}
+
+
+.lang-btn:hover::after {
+  opacity: 1;
+}
+.lang-btn.active {
+  transform: scale(1.2);
+}
+.cv-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 18px;
+  padding: 12px 24px;
+  background: linear-gradient(135deg, #ffd700, #ffb700);
+  color: #333;
+  font-weight: bold;
+  font-size: 16px;
+  text-decoration: none;
+  border-radius: 30px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.cv-btn::before {
+  content: "⬇";
+  font-size: 18px;
+}
+
+.cv-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+}
+
+.cv-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+
+
+
     /* Mobil optimalizálás */
 @media (max-width: 768px) {
   header h1 {
@@ -93,28 +176,45 @@
 </head>
 <body>
 
-  
   <header>
-    <h1>Gábor László Roland</h1>
-    <p>Motivated junior software developer passionate about frontend and game development, with hands-on experience building web applications and simple games. Skilled in OOP, debugging, Git, and creating interactive, user-focused solutions in collaborative, international environments.</p>
+    <div class="lang-switch">
+     <button onclick="setLanguage('en')" class="lang-btn" data-tooltip="English">
+       <img src="img/EN.png" alt="English">
+      </button>
+
+      <button onclick="setLanguage('hu')" class="lang-btn" data-tooltip="Magyar">
+        <img src="img/HU.png" alt="Magyar">
+      </button>
+    </div>
+
+    <h1 data-i18n="name">Gábor László Roland</h1>
+    <p data-i18n="intro">Motivated junior software developer passionate about frontend and game development, with hands-on experience building web applications and simple games. Skilled in OOP, debugging, Git, and creating interactive, user-focused solutions in collaborative, international environments.</p>
+    <a id="cvBtn" href="cv/Gábor László Roland eng.pdf" download class="cv-btn" data-i18n="cv">
+      Download CV
+    </a>
+
   </header>
 
   <!-- Skills Section -->
   <section id="skills">
-    <h2>Skills</h2>
-<p>HTML | CSS | JavaScript</p>
-<p>C# OOP | Node.js | REST | MySQL | Git</p>
+    <h2 data-i18n="skills">Skills</h2>
+    <p>HTML | CSS | JavaScript</p>
+    <p>C# OOP | Node.js | REST | MySQL | Git</p>
   </section>
 
   <!-- Projects Section -->
   <section id="projects">
-    <h2>Projects</h2>
+    <h2 data-i18n="projects">Projects</h2>
 
     <!-- Mini Slot Machine -->
     <div class="project">
       <h3>Mini Slot Machine</h3>
       <p><strong>Role:</strong> Frontend Developer</p>
-      <p><strong>Description:</strong> Interactive slot machine simulator with animated reels, responsive design, and user feedback.</p>
+      <p>
+        <strong>Description:</strong>  
+          <span data-i18n="slotDesc">
+            Interactive slot machine simulator with animated reels, responsive design, and user feedback.
+        </span></p>
       <p>
         <a href="https://gaborroland.github.io/SlotMachine/" target="_blank">View Live Demo</a> | 
         <a href="https://github.com/GaborRoland/SlotMachine" target="_blank">View Code</a>
@@ -126,7 +226,7 @@
     <div class="project">
       <h3>Mini Interactive Game Dashboard</h3>
       <p><strong>Role:</strong> Frontend Developer</p>
-      <p><strong>Description:</strong> Interactive web dashboard with clickable score counter and animated progress bar, showcasing responsive frontend UI and JavaScript skills.</p>
+      <p><strong>Description:</strong> <span data-i18n="dashboardDesc"> Interactive web dashboard with clickable score counter and animated progress bar, showcasing responsive frontend UI and JavaScript skills.</span></p>
       <p>
         <a href="https://gaborroland.github.io/GameDashboard/" target="_blank">View Live Demo</a> | 
         <a href="https://github.com/GaborRoland/GameDashboard" target="_blank">View Code</a>
@@ -134,10 +234,11 @@
       <iframe src="https://gaborroland.github.io/GameDashboard/"></iframe>
     </div>
 
+    <!-- Flappy Bird -->
     <div class="project">
       <h3>Flappy Bird (Unity)</h3>
       <p><strong>Role:</strong> Unity Developer</p>
-      <p><strong>Description:</strong> Unity-based Flappy Bird game demonstrating basic game mechanics, physics, and user interaction, playable online via WebGL.</p>
+      <p><strong>Description:</strong> <span data-i18n="flappyDesc"> Unity-based Flappy Bird game demonstrating basic game mechanics, physics, and user interaction, playable online via WebGL.</span></p>
       <p>
         <a href="https://play.unity.com/en/games/d7747150-ab09-4740-9815-0471628990cd/flappy-bird-by-glwithglr" target="_blank">Play Live Demo</a> | 
         <a href="https://github.com/GaborRoland/FlappyBird_project" target="_blank">View Code</a>
@@ -149,15 +250,61 @@
 
   <!-- Contact Section -->
   <section id="contact">
-    <h2>Contact</h2>
+    <h2 data-i18n="contact">Contact</h2>
     <p>Email: <a href="mailto:groll20051005@gmail.com">groll20051005@gmail.com</a></p>
     <p>LinkedIn: <a href="https://www.linkedin.com/in/lászló-roland-gábor-393462341/" target="_blank">linkedin.com/in/lászló-roland-gábor-393462341/</a></p>
     <p>GitHub: <a href="https://github.com/GaborRoland" target="_blank">github.com/GaborRoland</a></p>
   </section>
 
   <footer>
-    <p>© Gábor László Roland – Frontend Developer</p>
+    <p>© Gábor László Roland – Software Developer</p>
   </footer>
+<script>
+const translations = {
+  en: {
+    name: "Gábor László Roland",
+    intro: "Motivated junior software developer passionate about frontend and game development, with hands-on experience building web applications and simple games. Skilled in OOP, debugging, Git, and creating interactive, user-focused solutions in collaborative, international environments.",
+    skills: "Skills",
+    projects: "Projects",
+    contact: "Contact",
+    slotDesc: "Interactive slot machine simulator with animated reels, responsive design, and user feedback.",
+    dashboardDesc: "Interactive web dashboard with clickable score counter and animated progress bar.",
+    flappyDesc: "Unity-based Flappy Bird game demonstrating basic game mechanics, physics, and user interaction.",
+    cv: "Download CV"
+  },
+  hu: {
+    name: "Gábor László Roland",
+    intro: "Motivált junior szoftverfejlesztő frontend és játékfejlesztési fókuszsal, webalkalmazások és egyszerű játékok gyakorlati tapasztalatával.",
+    skills: "Készségek",
+    projects: "Projektek",
+    contact: "Kapcsolat",
+    slotDesc: "Interaktív nyerőgépes szimulátor animált tárcsákkal és reszponzív kialakítással.",
+    dashboardDesc: "Interaktív dashboard kattintható pontszámlálóval és animált progress barral.",
+    flappyDesc: "Unity alapú Flappy Bird játék alapvető játékmenettel, fizikával és felhasználói interakcióval.",
+    cv: "Önéletrajz letöltése"
+  }
+};
+
+function setLanguage(lang) {
+
+  const cvBtn = document.getElementById("cvBtn");
+  document.querySelectorAll("[data-i18n]").forEach(el => {
+    const key = el.getAttribute("data-i18n");
+    el.textContent = translations[lang][key];
+
+  if (lang === "hu") {
+  cvBtn.href = "cv/Gábor László Roland.pdf";
+} else {
+  cvBtn.href = "cv/Gábor László Roland eng.pdf";
+}
+  });
+  document.querySelectorAll(".lang-btn").forEach(btn =>
+  btn.classList.remove("active")
+);
+}
+
+
+</script>
 
 </body>
 </html>
