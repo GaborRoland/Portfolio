@@ -3,18 +3,35 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gábor László Roland - Frontend Portfolio</title>
+  <title>Gábor László Roland - Portfolio</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
   <style>
+    :root {
+  --bg-color: #f5f5f5;
+  --text-color: #333;
+  --card-bg: #ffffff;
+  --header-bg: #4e54c8;
+    }
+    body.dark {
+      --bg-color: #121212;
+      --text-color: #eaeaea;
+      --card-bg: #1e1e1e;
+      --header-bg: #2b2f8f;
+    }
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Inter', Arial, sans-serif;  
       margin: 0;
       padding: 0;
-      background: #f5f5f5;
-      color: #333;
+      background: var(--bg-color);
+      color: var(--text-color);
       line-height: 1.6;
     }
     header {
-      background: #4e54c8;
+      background: var(--header-bg);
       color: #fff;
       padding: 40px 20px;
       text-align: center;
@@ -36,16 +53,16 @@
       margin-bottom: 20px;
     }
     .project {
-      background: #fff;
+      background: var(--card-bg);
       padding: 20px;
       border-radius: 10px;
       margin-bottom: 30px;
       box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     }
-    .project a {
+    .project a:not(.cta-btn) {
       color: #4e54c8;
       text-decoration: none;
-      font-weight: bold;
+     font-weight: bold;
     }
     iframe {
       width: 100%;
@@ -150,11 +167,306 @@
   box-shadow: 0 4px 10px rgba(0,0,0,0.2);
 }
 
+.highlights {
+  margin-top: 10px;
+  padding-left: 20px;
+}
 
+.highlights li {
+  margin-bottom: 6px;
+  font-size: 0.95rem;
+}
+.theme-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-left: 10px;
+  color: white;
+}
+
+.theme-toggle svg {
+  display: none;
+}
+
+body.dark #moonIcon {
+  display: block;
+}
+
+body:not(.dark) #sunIcon {
+  display: block;
+}
+
+body,
+header,
+section,
+.project,
+footer {
+  transition:
+    background-color 0.35s ease,
+    color 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+.project {
+  transition:
+    background-color 0.35s ease,
+    box-shadow 0.35s ease,
+    transform 0.25s ease;
+}
+
+.theme-toggle svg {
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease;
+}
+
+body.dark #moonIcon {
+  opacity: 1;
+  transform: rotate(0deg) scale(1);
+}
+
+body:not(.dark) #sunIcon {
+  opacity: 1;
+  transform: rotate(0deg) scale(1);
+}
+
+#sunIcon,
+#moonIcon {
+  opacity: 0;
+  transform: rotate(-90deg) scale(0.5);
+}
+
+h1, h2, h3 {
+  font-weight: 700;
+}
+
+.project p {
+  font-weight: 400;
+}
+
+#contact p {
+  margin: 10px 0;
+}
+
+#contact a {
+  color: var(--header-bg);
+  font-weight: 600;
+  text-decoration: none;
+  position: relative;
+  transition: color 0.25s ease;
+}
+
+/* finom aláhúzás animáció */
+#contact a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  width: 0;
+  height: 2px;
+  background-color: var(--header-bg);
+  transition: width 0.25s ease;
+}
+
+#contact a:hover {
+  color: #ffd700;
+}
+
+#contact a:hover::after {
+  width: 100%;
+}
+
+body.dark h1,
+body.dark h2,
+body.dark h3 {
+  color: #e6e6ff;
+}
+
+.project a {
+  color: #4e54c8;
+}
+
+body.dark .project a {
+  color: #ffd700;
+}
+
+body.dark #contact a {
+  color: #ffd700;
+}
+
+body.dark #contact a::after {
+  background-color: #ffd700;
+}
+
+body.dark .project a:hover,
+body.dark #contact a:hover {
+  color: #ffffff;
+}
+
+.cta-btn {
+  display: inline-block;
+  padding: 8px 16px;
+  margin: 6px 6px 6px 0;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+
+/* Light mode */
+.cta-primary {
+  background: #4e54c8;
+  color: #fff;
+}
+
+.cta-secondary {
+  background: transparent;
+  color: #4e54c8;
+  border: 2px solid #4e54c8;
+}
+
+/* Dark mode */
+body.dark .cta-primary {
+  background: #ffd700;
+  color: #121212;
+}
+
+body.dark .cta-secondary {
+  color: #ffd700;
+  border-color: #ffd700;
+}
+
+/* Hover */
+.cta-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+}
+
+.project .cta-btn {
+  color: inherit;
+}
+
+/* --- CTA FIX --- */
+.project a.cta-btn {
+  color: unset;
+  background: unset;
+  border: unset;
+}
+
+/* PRIMARY CTA */
+.project a.cta-primary {
+  background: #4e54c8;
+  color: #ffffff;
+}
+
+/* SECONDARY CTA */
+.project a.cta-secondary {
+  background: transparent;
+  color: #4e54c8;
+  border: 2px solid #4e54c8;
+}
+
+/* DARK MODE */
+body.dark .project a.cta-primary {
+  background: #ffd700;
+  color: #121212;
+}
+
+body.dark .project a.cta-secondary {
+  color: #ffd700;
+  border-color: #ffd700;
+}
+
+.social-links {
+  margin-top: 14px;
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+}
+
+.social-links a {
+  color: #ffffff;
+  opacity: 0.85;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+.social-links a:hover {
+  transform: translateY(-2px);
+  opacity: 1;
+}
+.social-links {
+  margin-top: 14px;
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+}
+
+.social-icon {
+  color: #ffffff;
+  opacity: 0.85;
+  position: relative;
+  transition: transform 0.25s ease, opacity 0.25s ease, color 0.25s ease;
+}
+
+.social-icon:hover {
+  transform: translateY(-2px);
+  opacity: 1;
+}
+
+/* GitHub hover */
+.social-icon[href*="github"]:hover {
+  color: #ffd700;
+}
+
+/* GitHub + LinkedIn hover – egységes CTA szín */
+.social-icon[href*="github"]:hover,
+.social-icon[href*="linkedin"]:hover {
+  color: #ffd700;
+}
+
+
+/* Tooltip */
+.social-icon::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: -32px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #333;
+  color: #fff;
+  padding: 4px 8px;
+  font-size: 12px;
+  border-radius: 4px;
+  opacity: 0;
+  pointer-events: none;
+  white-space: nowrap;
+  transition: opacity 0.2s ease;
+}
+
+.social-icon:hover::after {
+  opacity: 1;
+}
+.open-demo-mobile {
+  display: none;
+  margin-bottom: 12px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+  }
+}
 
 
     /* Mobil optimalizálás */
 @media (max-width: 768px) {
+  .open-demo-mobile {
+    display: inline-block;
+  }
+  iframe {
+    display: none;
+  } 
   header h1 {
     font-size: 2rem;
   }
@@ -170,6 +482,35 @@
   #bird {
     height: 60vh; /* Flappy Bird iframe arányos */
   }
+  /* Header felső sor rendezése mobilon */
+.lang-switch {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.theme-toggle {
+  margin-left: 0;
+  margin-top: 8px;
+}
+
+/* CTA gombok egymás alá mobilon */
+@media (max-width: 480px) {
+  .cta-btn {
+    display: block;
+    width: fit-content;
+    margin: 10px auto;
+  }
+}
+
+/* Flappy Bird iframe mobilon */
+@media (max-width: 768px) {
+  #bird {
+    height: 60vh;
+  }
+}
+
 }
 
   </style>
@@ -186,12 +527,80 @@
         <img src="img/HU.png" alt="Magyar">
       </button>
     </div>
+    <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode">
+  <!-- SUN -->
+  <svg id="sunIcon" viewBox="0 0 24 24" width="22" height="22">
+    <circle cx="12" cy="12" r="5" fill="currentColor"/>
+    <g stroke="currentColor" stroke-width="2">
+      <line x1="12" y1="1" x2="12" y2="4"/>
+      <line x1="12" y1="20" x2="12" y2="23"/>
+      <line x1="1" y1="12" x2="4" y2="12"/>
+      <line x1="20" y1="12" x2="23" y2="12"/>
+      <line x1="4.2" y1="4.2" x2="6.3" y2="6.3"/>
+      <line x1="17.7" y1="17.7" x2="19.8" y2="19.8"/>
+      <line x1="4.2" y1="19.8" x2="6.3" y2="17.7"/>
+      <line x1="17.7" y1="6.3" x2="19.8" y2="4.2"/>
+    </g>
+  </svg>
+
+  <!-- MOON -->
+  <svg id="moonIcon" viewBox="0 0 24 24" width="22" height="22">
+    <path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z" fill="currentColor"/>
+  </svg>
+</button>
+
+
 
     <h1 data-i18n="name">Gábor László Roland</h1>
     <p data-i18n="intro">Motivated junior software developer passionate about frontend and game development, with hands-on experience building web applications and simple games. Skilled in OOP, debugging, Git, and creating interactive, user-focused solutions in collaborative, international environments.</p>
     <a id="cvBtn" href="cv/Gábor László Roland eng.pdf" download class="cv-btn" data-i18n="cv">
       Download CV
     </a>
+
+    <div class="social-links">
+  <a href="https://github.com/GaborRoland"
+     target="_blank"
+     class="social-icon"
+     data-tooltip="GitHub"
+     data-i18n-tooltip="github">
+    <!-- GitHub SVG -->
+    <svg viewBox="0 0 24 24" width="26" height="26">
+      <path fill="currentColor"
+        d="M12 2C6.48 2 2 6.58 2 12.2c0 4.49 2.87 8.3 6.84 9.65.5.1.68-.22.68-.48
+        0-.24-.01-.87-.01-1.7-2.78.62-3.37-1.38-3.37-1.38-.45-1.18-1.11-1.5-1.11-1.5
+        -.91-.64.07-.63.07-.63 1 .07 1.53 1.05 1.53 1.05
+        .9 1.56 2.36 1.11 2.94.85.09-.67.35-1.11.63-1.37
+        -2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.04 1.03-2.76
+        -.1-.26-.45-1.31.1-2.73 0 0 .84-.27 2.75 1.05
+        .8-.23 1.66-.34 2.52-.34.86 0 1.72.11 2.52.34
+        1.9-1.32 2.74-1.05 2.74-1.05.55 1.42.2 2.47.1 2.73
+        .64.72 1.03 1.64 1.03 2.76 0 3.94-2.34 4.8-4.57 5.05
+        .36.32.68.94.68 1.9 0 1.38-.01 2.5-.01 2.84
+        0 .27.18.59.69.49A10.2 10.2 0 0022 12.2C22 6.58 17.52 2 12 2z"/>
+    </svg>
+  </a>
+
+  <a href="https://www.linkedin.com/in/lászló-roland-gábor-393462341/"
+     target="_blank"
+     class="social-icon"
+     data-tooltip="LinkedIn"
+     data-i18n-tooltip="linkedin">
+    <!-- LinkedIn SVG -->
+    <svg viewBox="0 0 24 24" width="26" height="26">
+      <path fill="currentColor"
+        d="M4.98 3.5C4.98 4.88 3.86 6 2.49 6
+        1.12 6 0 4.88 0 3.5
+        0 2.12 1.12 1 2.49 1
+        3.86 1 4.98 2.12 4.98 3.5zM0 24V7.98h4.98V24H0z
+        M7.98 7.98H12.7v2.19h.07
+        c.66-1.25 2.28-2.57 4.7-2.57
+        5.02 0 5.95 3.3 5.95 7.59V24h-4.98v-7.61
+        c0-1.81-.03-4.13-2.52-4.13
+        -2.53 0-2.92 1.97-2.92 4V24H7.98z"/>
+    </svg>
+  </a>
+</div>
+
 
   </header>
 
@@ -206,6 +615,40 @@
   <section id="projects">
     <h2 data-i18n="projects">Projects</h2>
 
+    <!-- Game Score API -->
+    <div class="project">
+     <h3>Game Score API (Node.js)</h3>
+      <p><strong>Role:</strong> Backend Developer</p>
+     <p>
+      <strong>Description:</strong> 
+      <span data-i18n="api_desc">
+        Backend REST API built with Node.js for user authentication and game score handling.
+      </span>
+    </p>
+
+      <ul class="highlights">
+        <li data-i18n="api_hl_1">REST API built with Node.js and Express</li>
+        <li data-i18n="api_hl_2">Live deployment using GitHub Pages (frontend) and Render (backend)</li>
+        <li data-i18n="api_hl_3">Game score handling with leaderboard logic</li>
+      </ul>
+     <p>
+      <a href="https://game-score-api-ewe5.onrender.com"
+        target="_blank"
+        class="cta-btn cta-primary"
+        data-i18n="view_api">
+        View Live API
+      </a>
+
+      <a href="https://github.com/GaborRoland/game-score-api"
+         target="_blank"
+         class="cta-btn cta-secondary"
+        data-i18n="view_code">
+        View Code
+      </a>
+
+      </p>
+    </div>
+
     <!-- Mini Slot Machine -->
     <div class="project">
       <h3>Mini Slot Machine</h3>
@@ -215,10 +658,26 @@
           <span data-i18n="slotDesc">
             Interactive slot machine simulator with animated reels, responsive design, and user feedback.
         </span></p>
+      <ul class="highlights">
+        <li data-i18n="slot_hl_1">Interactive UI with CSS animations</li>
+        <li data-i18n="slot_hl_2">Responsive design for desktop and mobile</li>
+        <li data-i18n="slot_hl_3">JavaScript-based game logic</li>
+      </ul>
       <p>
-        <a href="https://gaborroland.github.io/SlotMachine/" target="_blank">View Live Demo</a> | 
-        <a href="https://github.com/GaborRoland/SlotMachine" target="_blank">View Code</a>
+        <a href="https://gaborroland.github.io/SlotMachine/"  class="cta-btn cta-primary" target="_blank" data-i18n="view_demo">
+          View Live Demo
+        </a> | 
+        <a href="https://github.com/GaborRoland/SlotMachine" class="cta-btn cta-secondary" target="_blank" data-i18n="view_code">
+          View Code
+        </a>
       </p>
+      <a href="https://gaborroland.github.io/SlotMachine/"
+        class="cta-btn cta-primary open-demo-mobile"
+        target="_blank"
+        data-i18n="open_demo">
+        Open demo
+      </a>
+
       <iframe src="https://gaborroland.github.io/SlotMachine/"></iframe>
     </div>
 
@@ -227,30 +686,30 @@
       <h3>Mini Interactive Game Dashboard</h3>
       <p><strong>Role:</strong> Frontend Developer</p>
       <p><strong>Description:</strong> <span data-i18n="dashboardDesc"> Interactive web dashboard with clickable score counter and animated progress bar, showcasing responsive frontend UI and JavaScript skills.</span></p>
+      <ul class="highlights">
+        <li data-i18n="dash_hl_1">Dynamic score counter and progress bar</li>
+        <li data-i18n="dash_hl_2">Event-driven JavaScript interactions</li>
+        <li data-i18n="dash_hl_3">Clean and responsive frontend layout</li>
+      </ul>
+
       <p>
-        <a href="https://gaborroland.github.io/GameDashboard/" target="_blank">View Live Demo</a> | 
-        <a href="https://github.com/GaborRoland/GameDashboard" target="_blank">View Code</a>
+        <a href="https://gaborroland.github.io/GameDashboard/" class="cta-btn cta-primary" target="_blank" data-i18n="view_demo">
+          View Live Demo
+        </a> | 
+        <a href="https://github.com/GaborRoland/GameDashboard" class="cta-btn cta-secondary" target="_blank" data-i18n="view_code">
+          View Code
+        </a>
       </p>
+      <a href="https://gaborroland.github.io/GameDashboard/"
+        class="cta-btn cta-primary open-demo-mobile"
+        target="_blank"
+        data-i18n="open_demo">
+        Open demo
+      </a>
+
       <iframe src="https://gaborroland.github.io/GameDashboard/"></iframe>
     </div>
   
-    <!-- Game Score API -->
-    <div class="project">
-     <h3>Game Score API (Node.js)</h3>
-      <p><strong>Role:</strong> Backend Developer</p>
-     <p>
-       <strong>Description:</strong>
-       Backend REST API built with Node.js for user authentication and game score handling.
-      </p>
-     <p>
-       <a href="https://game-score-api-ewe5.onrender.com" target="_blank">
-          View Live API
-       </a> |
-       <a href="https://github.com/GaborRoland/game-score-api" target="_blank">
-         View Code
-        </a>
-      </p>
-    </div>
 
 
     <!-- Flappy Bird -->
@@ -258,10 +717,24 @@
       <h3>Flappy Bird (Unity)</h3>
       <p><strong>Role:</strong> Unity Developer</p>
       <p><strong>Description:</strong> <span data-i18n="flappyDesc"> Unity-based Flappy Bird game demonstrating basic game mechanics, physics, and user interaction, playable online via WebGL.</span></p>
-      <p>
-        <a href="https://play.unity.com/en/games/d7747150-ab09-4740-9815-0471628990cd/flappy-bird-by-glwithglr" target="_blank">Play Live Demo</a> | 
-        <a href="https://github.com/GaborRoland/FlappyBird_project" target="_blank">View Code</a>
+      <ul class="highlights">
+        <li data-i18n="flappy_hl_1">2D game developed in Unity using C#</li>
+        <li data-i18n="flappy_hl_2">Collision handling and scoring system</li>
+        <li data-i18n="flappy_hl_3">Playable WebGL build</li>
+      </ul>
+      <p class="note" data-i18n="desktop_only">
+        Playable on desktop browsers only (Unity WebGL limitation).
       </p>
+      <p>
+        <a href="https://play.unity.com/en/games/d7747150-ab09-4740-9815-0471628990cd/flappy-bird-by-glwithglr" class="cta-btn cta-primary"
+          target="_blank" data-i18n="play_demo">
+          Play Live Demo
+        </a> | 
+        <a href="https://github.com/GaborRoland/FlappyBird_project" class="cta-btn cta-secondary" target="_blank" data-i18n="view_code">
+          View Code
+        </a>
+      </p>
+
       <iframe id="bird" src="https://play.unity.com/en/games/d7747150-ab09-4740-9815-0471628990cd/flappy-bird-by-glwithglr"></iframe>
     </div>
 
@@ -289,7 +762,28 @@ const translations = {
     slotDesc: "Interactive slot machine simulator with animated reels, responsive design, and user feedback.",
     dashboardDesc: "Interactive web dashboard with clickable score counter and animated progress bar.",
     flappyDesc: "Unity-based Flappy Bird game demonstrating basic game mechanics, physics, and user interaction.",
-    cv: "Download CV"
+    cv: "Download CV",
+    api_hl_1: "REST API built with Node.js and Express",
+    api_hl_2: "Live deployment using GitHub Pages (frontend) and Render (backend)",
+    api_hl_3: "Game score handling with leaderboard logic",
+    slot_hl_1: "Interactive UI with CSS animations",
+    slot_hl_2: "Responsive design for desktop and mobile",
+    slot_hl_3: "JavaScript-based game logic",
+    dash_hl_1: "Dynamic score counter and progress bar",
+    dash_hl_2: "Event-driven JavaScript interactions",
+    dash_hl_3: "Clean and responsive frontend layout",
+    flappy_hl_1: "2D game developed in Unity using C#",
+    flappy_hl_2: "Collision handling and scoring system",
+    flappy_hl_3: "Playable WebGL build",
+    api_desc: "Backend REST API built with Node.js for user authentication and game score handling.",
+    view_api: "View Live API",
+    view_demo: "View Live Demo",
+    play_demo: "Play Live Demo",
+    view_code: "View Code",
+    github: "GitHub profile",
+    linkedin: "LinkedIn profile",
+    open_demo: "Open demo (fullscreen)",
+    desktop_only: "Playable on desktop browsers only (Unity WebGL limitation)."
   },
   hu: {
     name: "Gábor László Roland",
@@ -300,7 +794,28 @@ const translations = {
     slotDesc: "Interaktív nyerőgépes szimulátor animált tárcsákkal és reszponzív kialakítással.",
     dashboardDesc: "Interaktív dashboard kattintható pontszámlálóval és animált progress barral.",
     flappyDesc: "Unity alapú Flappy Bird játék alapvető játékmenettel, fizikával és felhasználói interakcióval.",
-    cv: "Önéletrajz letöltése"
+    cv: "Önéletrajz letöltése",
+    api_hl_1: "Node.js és Express alapú REST API",
+    api_hl_2: "Éles deploy GitHub Pagesen (frontend) és Renderen (backend)",
+    api_hl_3: "Játékpontszám-kezelés ranglista logikával",
+    slot_hl_1: "Interaktív felület CSS animációkkal",
+    slot_hl_2: "Reszponzív kialakítás asztali és mobil nézetre",
+    slot_hl_3: "JavaScript-alapú játékmenet logika",
+    dash_hl_1: "Dinamikus pontszámláló és progress bar",
+    dash_hl_2: "Eseményvezérelt JavaScript interakciók",
+    dash_hl_3: "Letisztult és reszponzív frontend elrendezés",
+    flappy_hl_1: "2D játék Unity-ben C# használatával",
+    flappy_hl_2: "Ütközéskezelés és pontozási rendszer",
+    flappy_hl_3: "WebGL-ben futtatható build",
+    api_desc: "Node.js alapú REST API felhasználókezeléshez és játékpontszámok kezeléséhez.",
+    view_api: "Élő API megnyitása",
+    view_demo: "Élő demó megtekintése",
+    play_demo: "Játék indítása",
+    view_code: "Forráskód megtekintése",
+    github: "GitHub profil",
+  linkedin: "LinkedIn profil",
+  open_demo: "Demó megnyitása (teljes képernyő)",
+  desktop_only: "Csak asztali böngészőn játszható (Unity WebGL korlátozás)."
   }
 };
 
@@ -310,18 +825,42 @@ function setLanguage(lang) {
   document.querySelectorAll("[data-i18n]").forEach(el => {
     const key = el.getAttribute("data-i18n");
     el.textContent = translations[lang][key];
+  });
 
   if (lang === "hu") {
   cvBtn.href = "cv/Gábor László Roland.pdf";
 } else {
   cvBtn.href = "cv/Gábor László Roland eng.pdf";
 }
-  });
   document.querySelectorAll(".lang-btn").forEach(btn =>
   btn.classList.remove("active")
 );
+document.querySelectorAll("[data-i18n-tooltip]").forEach(el => {
+  const key = el.getAttribute("data-i18n-tooltip");
+  el.setAttribute("data-tooltip", translations[lang][key]);
+});
+
 }
 
+const themeToggle = document.getElementById("themeToggle");
+
+function setTheme(theme) {
+  document.body.classList.toggle("dark", theme === "dark");
+  localStorage.setItem("theme", theme);
+  themeToggle.textContent = theme === "dark" ? "☀️" : "🌙";
+}
+
+// Inicializálás
+const savedTheme = localStorage.getItem("theme") || "light";
+setTheme(savedTheme);
+
+// Kattintás
+themeToggle.addEventListener("click", () => {
+  const newTheme = document.body.classList.contains("dark")
+    ? "light"
+    : "dark";
+  setTheme(newTheme);
+});
 
 </script>
 
